@@ -1,2 +1,2 @@
-# 455-a2
-IAT 455 Immersive Environments - Assignment 2 Unity Project
+# 455-a3
+IAT 455 Immersive Environments - Assignment 3 Unity Project

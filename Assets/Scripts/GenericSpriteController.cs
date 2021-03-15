@@ -25,6 +25,8 @@ public class GenericSpriteController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(cameraToLookAt.transform);  
+        if (cameraToLookAt != null) {
+            transform.LookAt(cameraToLookAt.transform);  
+        }  
     }
 }

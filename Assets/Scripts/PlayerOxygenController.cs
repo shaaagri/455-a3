@@ -10,6 +10,7 @@ public class PlayerOxygenController : MonoBehaviour
 {
     public float oxygen = 100.0f;   // percentage (min = 0.0, max = 100.0)
     public float decreaseRate = 0.5f;     // pct. per second
+    public bool disabled = true;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,10 @@ public class PlayerOxygenController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (disabled) {
+            return;
+        }
+
         float frameDurationCoef = (Time.deltaTime / 1.0f);  
 
         // the oxygen depletion mechanic

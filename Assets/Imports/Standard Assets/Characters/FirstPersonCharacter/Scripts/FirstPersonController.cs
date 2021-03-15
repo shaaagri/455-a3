@@ -44,6 +44,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Catapulting;  /* Added by student */
         private AudioSource m_AudioSource;
         private float m_JumpSpeedSaved;  /* Added by student */
+        private bool m_LockControls = false;  /* Added by student */
 
         // Use this for initialization
         private void Start()
@@ -64,9 +65,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         private void Update()
         {
-            RotateView();
+            if (!m_LockControls) {
+                RotateView();  /* Added by student */
+            }
+            
             // the jump state needs to read here to make sure it is not missed
-            if (!m_Jump)
+            if (!m_Jump && !m_LockControls)
             {
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
             }
@@ -103,6 +107,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void FixedUpdate()
         {
+            if (m_LockControls) {
+                return;
+            }
+            
             float speed;
             GetInput(out speed);
             // always move along the camera forward as it is the direction that it being aimed at
@@ -273,6 +281,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_Jump = true;
                 m_Catapulting = true;
             }
+        }
+
+        /* Added by student */
+        public void LockControls(bool value) {
+            m_LockControls = value;
+        }
+
+         /* Added by student */
+        public void LockCursor(bool value) {
+            m_MouseLook.lockCursor = value;
         }
     }
 }
